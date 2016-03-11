@@ -23,10 +23,10 @@
 *.lib
 
 # Executables
-*.exe
 *.out
 *.app
 */x64/*
 x64/Debug/*
 x64/Release/*
 .vs/*
+**/Release/*

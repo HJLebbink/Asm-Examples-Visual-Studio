@@ -10,7 +10,7 @@
       Condition="'$(ConfigurationType)' != 'Makefile'">_SelectedFiles;$(YASMDependsOn)</YASMDependsOn>
   </PropertyGroup>
   <PropertyGroup>
-    <YasmPath Condition= "'$(YASMPATH)' == ''">$(VCInstallDir)bin\</YasmPath>
+    <YasmPath Condition= "'$(YASMPATH)' == ''">Resources\Yasm32\</YasmPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <YASM>
@@ -18,9 +18,9 @@
       <ObjectFile>$(IntDir)</ObjectFile>
       <PreProc>0</PreProc>
       <Parser>0</Parser>
-      <CommandLineTemplate>"$(YasmPath)"vsyasm.exe -Xvc -f $(Platform) [AllOptions] [AdditionalOptions] [Inputs]</CommandLineTemplate>
+      <CommandLineTemplate>Resources\Yasm32\vsyasm.exe -Xvc -f $(Platform) [AllOptions] [AdditionalOptions] [Inputs]</CommandLineTemplate>
       <Outputs>%(ObjectFile)</Outputs>
-      <ExecutionDescription>YASM: Assembling %(Filename)%(Extension)</ExecutionDescription>
+      <ExecutionDescription>Yasm32: Assembling %(Filename)%(Extension)</ExecutionDescription>
       <ShowOnlyRuleProperties>false</ShowOnlyRuleProperties>
     </YASM>
   </ItemDefinitionGroup>

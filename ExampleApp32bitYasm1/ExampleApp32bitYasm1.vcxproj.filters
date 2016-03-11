@@ -30,15 +30,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resources\readme.txt">
+    <Text Include="Resources\Yasm32\readme.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\vsyasm.props">
+    <None Include="Resources\Yasm32\vsyasm.props">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\vsyasm.targets">
+    <None Include="Resources\Yasm32\vsyasm.targets">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
