@@ -1,0 +1,2 @@
+LIBRARY exampleAppJni1
+EXPORTS Java_JniTest1_testCode

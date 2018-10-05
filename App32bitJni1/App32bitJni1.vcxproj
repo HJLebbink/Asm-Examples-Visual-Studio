@@ -19,34 +19,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{423FB313-D6AB-4CD0-8C70-287582AB584E}</ProjectGuid>
+    <ProjectGuid>{3B0823AB-5118-4568-9083-7623206359F3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ConsoleApplication</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>ExampleApp64bitYasm1</ProjectName>
+    <ProjectName>App32bitJni1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -54,7 +54,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="Resources\Yasm64\vsyasm.props" />
+    <Import Project="Resources\Yasm32\vsyasm.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -96,11 +96,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <YASM>
+      <Debug>true</Debug>
+    </YASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
@@ -110,6 +113,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <YASM>
+      <Debug>true</Debug>
+    </YASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -127,6 +133,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>exampleJni.def</ModuleDefinitionFile>
     </Link>
     <YASM>
       <Debug>true</Debug>
@@ -162,16 +169,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <YASM Include="test.asm">
+    <YASM Include="exampleJni.asm">
       <FileType>Document</FileType>
-      <PreProc Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">1</PreProc>
+      <PreProc Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">0</PreProc>
       <PreProc Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">1</PreProc>
-      <Parser Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">1</Parser>
+      <Parser Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">0</Parser>
       <Parser Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">1</Parser>
-      <PreProc Condition="'$(Configuration)|$(Platform)'=='Release|x64'">1</PreProc>
-      <PreProc Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">1</PreProc>
-      <Parser Condition="'$(Configuration)|$(Platform)'=='Release|x64'">1</Parser>
-      <Parser Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">1</Parser>
+      <PreProc Condition="'$(Configuration)|$(Platform)'=='Release|x64'">0</PreProc>
+      <PreProc Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">0</PreProc>
+      <Parser Condition="'$(Configuration)|$(Platform)'=='Release|x64'">0</Parser>
+      <Parser Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">0</Parser>
       <Debug Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</Debug>
       <Debug Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</Debug>
     </YASM>
@@ -180,16 +187,22 @@
     <ClInclude Include="my_headers.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resources\Yasm64\readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Yasm64\vsyasm.props">
+    <None Include="exampleJni.def" />
+    <None Include="Resources\Java\JniTest1.java" />
+    <None Include="Resources\Java\run32bits.cmd" />
+    <None Include="Resources\Yasm32\vsyasm.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Resources\Yasm64\vsyasm.targets" />
+    <None Include="Resources\Yasm32\vsyasm.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Yasm32\readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resources\Yasm32\vsyasm.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="Resources\Yasm64\vsyasm.targets" />
+    <Import Project="Resources\Yasm32\vsyasm.targets" />
   </ImportGroup>
 </Project>
